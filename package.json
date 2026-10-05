@@ -1,0 +1,12 @@
+{
+  "name": "safebite-gemma",
+  "version": "1.0.0",
+  "description": "Local, private allergy-safe meal planner and ingredient scanner built for friends using Google DeepMind Gemma 2",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["gemma2", "open-source-ai", "local-llm", "allergy-safety", "ollama"],
+  "author": "Aditya Bafna",
+  "license": "MIT"
+}

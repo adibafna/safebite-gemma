@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeBite — Local Gemma 2 Allergy Guard for Friends & Roommates</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="logo-icon">🛡️</div>
+        <div>
+          <div class="brand-title">SafeBite <span class="badge-gemma">Powered by Gemma 2</span></div>
+          <div class="brand-subtitle">Private, 100% Local Allergy-Safe Meal & Snack Guard for Friends</div>
+        </div>
+      </div>
+      <div class="nav-status">
+        <div id="statusIndicator" class="status-chip loading">
+          <span class="status-dot"></span>
+          <span id="statusText">Connecting to local Gemma...</span>
+        </div>
+        <div class="privacy-badge">
+          <span class="lock-icon">🔒</span> 100% Offline & Private
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="main-layout">
+      <!-- Sidebar / Friend Profile Card -->
+      <aside class="friend-profile-card">
+        <div class="card-header">
+          <div class="avatar">👤</div>
+          <div>
+            <h3>Friend / Roommate Profile</h3>
+            <p class="card-subtitle">Personalized dietary restrictions</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="roommateName">Friend's Name</label>
+          <input type="text" id="roommateName" value="Alex" placeholder="e.g. Alex, Rohan, Grandma">
+        </div>
+
+        <div class="form-group">
+          <label>Known Allergies & Intolerances</label>
+          <div class="allergy-tags" id="allergyTagContainer">
+            <label class="tag-checkbox"><input type="checkbox" value="Gluten / Celiac" checked> Gluten (Celiac)</label>
+            <label class="tag-checkbox"><input type="checkbox" value="Peanuts" checked> Peanuts</label>
+            <label class="tag-checkbox"><input type="checkbox" value="Tree Nuts"> Tree Nuts</label>
+            <label class="tag-checkbox"><input type="checkbox" value="Dairy / Lactose" checked> Dairy / Lactose</label>
+            <label class="tag-checkbox"><input type="checkbox" value="Shellfish"> Shellfish</label>
+            <label class="tag-checkbox"><input type="checkbox" value="Soy"> Soy</label>
+            <label class="tag-checkbox"><input type="checkbox" value="Eggs"> Eggs</label>
+            <label class="tag-checkbox"><input type="checkbox" value="Sesame"> Sesame</label>
+          </div>
+          <input type="text" id="customAllergies" placeholder="Additional allergies (e.g. mustard, kiwi, MSG)" class="input-sub">
+        </div>
+
+        <div class="form-group">
+          <label for="severitySelect">Reaction Severity</label>
+          <select id="severitySelect">
+            <option value="Severe / Anaphylactic Risk (Zero Tolerance)" selected>🚨 Severe / Anaphylactic (Zero Tolerance)</option>
+            <option value="Strict Medical (Celiac / High Sensitivity)">⚠️ Strict Medical (Celiac / High Sensitivity)</option>
+            <option value="Moderate Intolerance / Discomfort">🟡 Moderate Intolerance</option>
+            <option value="Mild Preference / Lifestyle">🟢 Lifestyle Preference</option>
+          </select>
+        </div>
+
+        <div class="profile-tip">
+          <strong>Why Local AI Matters:</strong>
+          <span>Medical conditions and allergy profiles stay stored exclusively in your browser and on your local machine. No health data ever leaves your device.</span>
+        </div>
+      </aside>
+
+      <!-- Center Content Area: Tabs & Action -->
+      <section class="content-area">
+        <!-- Tabs Navigation -->
+        <div class="tab-nav">
+          <button class="tab-btn active" data-tab="scannerTab">
+            <span class="tab-icon">🔍</span> Ingredient Allergen Scanner
+          </button>
+          <button class="tab-btn" data-tab="recipeTab">
+            <span class="tab-icon">🍳</span> Safe Pantry Meal Generator
+          </button>
+        </div>
+
+        <!-- Tab 1: Scanner -->
+        <div id="scannerTab" class="tab-content active">
+          <div class="action-card">
+            <div class="action-header">
+              <h3>Scan Package Ingredients or Takeout Food</h3>
+              <p>Paste the ingredient label or menu description. Gemma 2 will scan for direct allergens, hidden derivatives (like whey, malt, lecithin), and cross-contact risks.</p>
+            </div>
+
+            <div class="quick-examples">
+              <span class="quick-label">Try quick samples:</span>
+              <button class="chip-sample" onclick="loadSample('safe')">✅ Safe Gluten-Free Granola</button>
+              <button class="chip-sample" onclick="loadSample('danger')">🚨 Sneaky Danger (Soy Sauce & Whey)</button>
+              <button class="chip-sample" onclick="loadSample('caution')">⚠️ Facility Warning (Cross-Contact)</button>
+            </div>
+
+            <textarea id="ingredientsInput" rows="5" placeholder="Paste ingredients list here... e.g., Rolled oats, maple syrup, coconut oil, vanilla extract, sea salt..."></textarea>
+
+            <button id="scanBtn" class="btn-primary">
+              <span class="btn-icon">⚡</span> Inspect with Local Gemma 2
+            </button>
+          </div>
+
+          <!-- Scanner Results -->
+          <div id="scannerResult" class="result-container hidden">
+            <div class="result-header">
+              <div class="result-title">
+                <h4>Analysis Result</h4>
+                <div class="telemetry" id="scannerTelemetry">Inference: 0ms</div>
+              </div>
+              <button class="btn-copy" onclick="copyResult('scannerOutput')">📋 Copy for Friend</button>
+            </div>
+            <div id="scannerOutput" class="markdown-output"></div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Recipe Generator -->
+        <div id="recipeTab" class="tab-content">
+          <div class="action-card">
+            <div class="action-header">
+              <h3>Cook Safely With What You Have</h3>
+              <p>List what's currently in your fridge or pantry. Gemma 2 will craft a customized, gourmet recipe guaranteed 100% free of your friend's allergens, plus kitchen safety hygiene rules.</p>
+            </div>
+
+            <div class="pantry-grid">
+              <div class="form-group">
+                <label for="pantryInput">Ingredients in Fridge / Pantry</label>
+                <textarea id="pantryInput" rows="4" placeholder="e.g. Boneless chicken breast, white jasmine rice, garlic, olive oil, bell peppers, fresh cilantro, lime..."></textarea>
+              </div>
+              <div class="form-group">
+                <label for="cuisineInput">Style / Cuisine / Vibe</label>
+                <input type="text" id="cuisineInput" placeholder="e.g. Quick 20-min dinner, Mexican bowl, Italian risotto, Cozy soup" value="Quick 20-min cozy dinner">
+              </div>
+            </div>
+
+            <button id="recipeBtn" class="btn-primary">
+              <span class="btn-icon">✨</span> Generate Safe Recipe with Gemma 2
+            </button>
+          </div>
+
+          <!-- Recipe Results -->
+          <div id="recipeResult" class="result-container hidden">
+            <div class="result-header">
+              <div class="result-title">
+                <h4>Custom Safe Recipe</h4>
+                <div class="telemetry" id="recipeTelemetry">Inference: 0ms</div>
+              </div>
+              <button class="btn-copy" onclick="copyResult('recipeOutput')">📋 Copy Recipe</button>
+            </div>
+            <div id="recipeOutput" class="markdown-output"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer with Open Source AI Specs -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div>
+          <strong>Open Innovation Core:</strong> Gemma 2 (2B Parameters, Open Weights by Google DeepMind) running locally on your hardware.
+        </div>
+        <div class="footer-links">
+          <span>Zero Cloud Latency</span> • 
+          <span>Zero API Cost</span> • 
+          <span>Zero Data Telemetry</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
