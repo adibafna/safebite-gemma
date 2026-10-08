@@ -2,9 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const templatePath = 'C:\\Users\\ZFXMIKEY\\.gemini\\antigravity\\brain\\bfd5094c-9699-40bf-85a9-22eba9f18ec5\\.user_uploaded\\media_1791394623885.docx';
+const templatePath = 'C:\\\\Users\\\\ZFXMIKEY\\\\.gemini\\\\antigravity\\\\brain\\\\bfd5094c-9699-40bf-85a9-22eba9f18ec5\\\\.user_uploaded\\\\media_1791394623885.docx';
 const outReport = 'C:\\Users\\ZFXMIKEY\\Downloads\\SafeBite_PBL_Report.docx';
 const outViva = 'C:\\Users\\ZFXMIKEY\\Downloads\\SafeBite_Viva_Guide.docx';
+
+const screenshotDir = 'C:\\Users\\ZFXMIKEY\\Downloads\\safebite_screenshots';
 
 // Helper XML builders
 function escapeXml(unsafe) {
@@ -67,6 +69,10 @@ function heading2(text) {
 
 function heading3(text) {
   return p(text, { bold: true, size: 24, font: 'Times New Roman', before: 140, after: 80, align: 'left' });
+}
+
+function imageDrawing(rId, cx = 5200000, cy = 3450000) {
+  return `<w:p><w:pPr><w:spacing w:before="140" w:after="60"/><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:noProof/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${cx}" cy="${cy}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="${Math.floor(Math.random()*1000000)}" name="Figure"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="0" name="figure.png"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:embed="${rId}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`;
 }
 
 function table(headers, rows, colWidths = []) {
@@ -135,8 +141,8 @@ reportBody.push(p('“SAFEBITE: PRIVACY-PRESERVING AI-POWERED DIETARY SAFETY ASS
 reportBody.push(p('is submitted to', { font: 'Times New Roman', size: 24, align: 'center', after: 40 }));
 reportBody.push(p('Department of Computer Science Engineering,', { font: 'Times New Roman', size: 26, bold: true, align: 'center', after: 40 }));
 reportBody.push(p('In partial fulfilment of', { font: 'Times New Roman', size: 24, align: 'center', after: 40 }));
-reportBody.push(p('AGENTIC ARTIFICIAL INTELLIGENCE', { font: 'Times New Roman', size: 28, bold: true, align: 'center', after: 160 }));
-reportBody.push(p('Submitted To:  Prof. Deepika Sharma', { font: 'Times New Roman', size: 24, bold: true, align: 'center', after: 160 }));
+reportBody.push(p('ARTIFICIAL INTELLIGENCE', { font: 'Times New Roman', size: 28, bold: true, align: 'center', after: 160 }));
+reportBody.push(p('Submitted To:  Prof. Smita Barne', { font: 'Times New Roman', size: 24, bold: true, align: 'center', after: 160 }));
 reportBody.push(p('Submitted By:', { font: 'Times New Roman', size: 24, bold: true, align: 'center', after: 80 }));
 
 // Team Table
@@ -162,7 +168,7 @@ reportBody.push(p('Certified that this project report “SAFEBITE: PRIVACY-PRESE
 reportBody.push(table(
   ['SIGNATURE', 'SIGNATURE'],
   [
-    ['Prof. Deepika Sharma', 'Dr. Nidhi Sharma'],
+    ['Prof. Smita Barne', 'Dr. Nidhi Sharma'],
     ['SUPERVISOR', 'HEAD OF THE DEPARTMENT']
   ],
   [4500, 4500]
@@ -175,15 +181,11 @@ reportBody.push(p('TABLE OF FIGURES', { font: 'Times New Roman', size: 30, bold:
 reportBody.push(table(
   ['Figure No.', 'Caption & Description', 'Page No.'],
   [
-    ['Figure 1', 'SafeBite Editorial User Interface and Local Model Health Telemetry', '10'],
-    ['Figure 2', 'Roommate Profile Configuration & Reaction Severity Thresholds', '10'],
-    ['Figure 3', 'Ingredient Allergen Scanner Result Catching Hidden Derivative Toxins', '11'],
-    ['Figure 4', 'Safe Pantry-to-Plate Recipe Generation with Cross-Contamination Tips', '11'],
-    ['Figure 5', 'Zero-Egress System Architecture & Edge AI Execution Flow', '12'],
-    ['Figure 6', 'Structured System Prompt Template Enforcing Safety Directives', '12'],
-    ['Figure 7', 'Empirical 15-Point Allergen Detection Benchmark Suite Results', '13']
+    ['Figure 1', 'SafeBite Editorial User Interface and Local Model Health Telemetry', '13'],
+    ['Figure 2', 'Ingredient Allergen Scanner Catching Hidden Derivative Toxins', '14'],
+    ['Figure 3', 'Safe Pantry-to-Plate Recipe Generation with Cross-Contamination Directives', '15']
   ],
-  [1600, 6400, 1200]
+  [1800, 6200, 1200]
 ));
 
 reportBody.push(pageBreak());
@@ -193,15 +195,15 @@ reportBody.push(p('INDEX', { font: 'Times New Roman', size: 30, bold: true, alig
 reportBody.push(table(
   ['Sr. No.', 'Table Of Content', 'Page No.'],
   [
-    ['1', 'Abstract', '5'],
+    ['1', 'Abstract', '4'],
     ['2', 'Chapter 1: Introduction', '5'],
-    ['3', 'Chapter 2: Literature Review', '6'],
-    ['4', 'Chapter 3: Theory & System Architecture', '7'],
-    ['5', 'Chapter 4: Implementation Details', '8'],
-    ['6', 'Chapter 5: Empirical Verification & Safety Benchmark', '10'],
-    ['7', 'Chapter 6: Results & Application Walkthrough', '12'],
-    ['8', 'Chapter 7: Conclusion & Future Scope', '14'],
-    ['9', 'References & Bibliography', '15']
+    ['3', 'Chapter 2: Literature Review', '7'],
+    ['4', 'Chapter 3: Theory & System Architecture', '8'],
+    ['5', 'Chapter 4: Implementation Details', '10'],
+    ['6', 'Chapter 5: Empirical Verification & Safety Benchmark', '11'],
+    ['7', 'Chapter 6: Results & Application Walkthrough', '13'],
+    ['8', 'Chapter 7: Conclusion & Future Scope', '16'],
+    ['9', 'References & Bibliography', '17']
   ],
   [1400, 6600, 1200]
 ));
@@ -380,31 +382,35 @@ reportBody.push(p('Empirical Summary: SafeBite recorded a 100% pass rate (15/15)
 
 reportBody.push(pageBreak());
 
-// 11. Chapter 6: Results & Application Walkthrough
+// 11. Chapter 6: Results & Application Walkthrough (WITH LIVE SCREENSHOTS)
 reportBody.push(heading1('Chapter 6: Results & Application Walkthrough'));
 
 reportBody.push(heading2('6.1 User Interface & Telemetry Verification'));
 reportBody.push(p('The redesigned interface provides an editorial, warm paper layout that eliminates typical AI cliches. The top bar features an active status chip displaying "Online: gemma2:2b" connected to localhost:11434 with zero external network connectivity.', { justify: true }));
 
+// Embed Screenshot 1 (Dashboard)
+reportBody.push(imageDrawing('rId10', 5200000, 3450000));
+reportBody.push(p('Figure 1  SafeBite Editorial User Interface and Local Model Health Telemetry', { bold: true, align: 'center', after: 180 }));
+
+reportBody.push(pageBreak());
+
 reportBody.push(heading2('6.2 Case Study 1: The Sneaky Snack Hazard'));
 reportBody.push(p('Test Case: A roommate evaluating barbecue potato chips with the following label: "Dehydrated potatoes, vegetable oil, soy sauce powder (wheat, soybeans, salt), hydrolyzed whey protein, natural flavor, disodium inosinate."', { justify: true }));
-reportBody.push(p('Gemma 2 Analysis Output:', { bold: true }));
-reportBody.push(p(`**SAFETY VERDICT**: [UNSAFE / DANGER]
+reportBody.push(p('Gemma 2 Analysis Output: The local model identifies both hidden dairy (hydrolyzed whey protein) and hidden gluten (soy sauce wheat powder), issuing a red [UNSAFE / DANGER] verdict with direct medical counsel.', { justify: true }));
 
-**FLAGGED INGREDIENTS**:
-• Hydrolyzed whey protein: Contains dairy (lactose) and poses an acute reaction risk.
-• Soy sauce powder (wheat, soybeans): Contains wheat and soy, directly violating Celiac dietary constraints.
+// Embed Screenshot 2 (Scanner Result)
+reportBody.push(imageDrawing('rId11', 5200000, 3450000));
+reportBody.push(p('Figure 2  Ingredient Allergen Scanner Result Catching Hidden Derivative Toxins', { bold: true, align: 'center', after: 180 }));
 
-**ACTIONABLE VERDICT FOR ROOMMATE**: Do not prepare or offer this item to Alex. It contains severe antigens capable of triggering an acute medical reaction.`, { font: 'Courier New', size: 18, line: 240, after: 140 }));
+reportBody.push(pageBreak());
 
 reportBody.push(heading2('6.3 Case Study 2: The Safe Pantry Chef'));
 reportBody.push(p('Test Case: Roommates with chicken breast, jasmine rice, broccoli, olive oil, garlic, ginger, and pure honey asking for a safe dinner for Alex (Celiac, peanut-free, dairy-free).', { justify: true }));
-reportBody.push(p(`Recipe Generated: Sweet & Spicy Ginger Chicken Bowls
-Allergen Guarantee: 100% gluten-free, dairy-free, and peanut-free.
-Cross-Contamination Protocol:
-• Dedicated Cutting Boards: Use separate boards for raw poultry and vegetables.
-• Clean Sponges: Use fresh sponges to avoid cross-contact from prior dairy/gluten prep.
-• Utensil Sanitation: Wash all skillets in hot soapy water prior to cooking.`, { font: 'Courier New', size: 18, line: 240, after: 140 }));
+reportBody.push(p('Recipe Generated: Sweet & Spicy Ginger Chicken Bowls. SafeBite synthesizes a full recipe guaranteed 100% allergen-free alongside essential kitchen cross-contamination tips (dedicated cutting boards and separate sponges).', { justify: true }));
+
+// Embed Screenshot 3 (Recipe Result)
+reportBody.push(imageDrawing('rId12', 5200000, 3450000));
+reportBody.push(p('Figure 3  Safe Pantry-to-Plate Recipe Generation with Cross-Contamination Directives', { bold: true, align: 'center', after: 180 }));
 
 reportBody.push(heading2('6.4 Performance Benchmarking'));
 reportBody.push(table(
@@ -473,8 +479,8 @@ vivaBody.push(p('“SAFEBITE: COMPREHENSIVE VIVA PREPARATION & ORAL DEFENSE GUID
 vivaBody.push(p('is submitted to', { font: 'Times New Roman', size: 24, align: 'center', after: 40 }));
 vivaBody.push(p('Department of Computer Science Engineering,', { font: 'Times New Roman', size: 26, bold: true, align: 'center', after: 40 }));
 vivaBody.push(p('In partial fulfilment of', { font: 'Times New Roman', size: 24, align: 'center', after: 40 }));
-vivaBody.push(p('AGENTIC ARTIFICIAL INTELLIGENCE', { font: 'Times New Roman', size: 28, bold: true, align: 'center', after: 160 }));
-vivaBody.push(p('Submitted To:  Prof. Deepika Sharma', { font: 'Times New Roman', size: 24, bold: true, align: 'center', after: 160 }));
+vivaBody.push(p('ARTIFICIAL INTELLIGENCE', { font: 'Times New Roman', size: 28, bold: true, align: 'center', after: 160 }));
+vivaBody.push(p('Submitted To:  Prof. Smita Barne', { font: 'Times New Roman', size: 24, bold: true, align: 'center', after: 160 }));
 vivaBody.push(p('Submitted By:', { font: 'Times New Roman', size: 24, bold: true, align: 'center', after: 80 }));
 
 vivaBody.push(table(
@@ -602,12 +608,21 @@ const finalVivaXml = xmlHeader + vivaBody.join('') + sectPr;
 // ==========================================
 // PACKAGING DOCX FILES VIA POWERSHELL
 // ==========================================
-function packageDocx(xmlContent, outDocxPath) {
+function packageDocx(xmlContent, outDocxPath, isReport = false) {
   const tempExtractDir = 'C:\\Users\\ZFXMIKEY\\Downloads\\temp_docx_pack_' + Date.now();
   if (fs.existsSync(tempExtractDir)) fs.rmSync(tempExtractDir, { recursive: true, force: true });
 
   console.log(`Unpacking template to ${tempExtractDir}...`);
   execSync(`powershell -Command "Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory('${templatePath}', '${tempExtractDir}')"`);
+
+  if (isReport) {
+    console.log('Copying screenshots into word/media/ for report...');
+    const mediaDir = path.join(tempExtractDir, 'word', 'media');
+    if (!fs.existsSync(mediaDir)) fs.mkdirSync(mediaDir, { recursive: true });
+    fs.copyFileSync(path.join(screenshotDir, 'fig1_dashboard.png'), path.join(mediaDir, 'image3.png'));
+    fs.copyFileSync(path.join(screenshotDir, 'fig2_scanner.png'), path.join(mediaDir, 'image4.png'));
+    fs.copyFileSync(path.join(screenshotDir, 'fig3_recipe.png'), path.join(mediaDir, 'image5.png'));
+  }
 
   const docXmlPath = path.join(tempExtractDir, 'word', 'document.xml');
   console.log(`Writing custom document.xml (${xmlContent.length} chars)...`);
@@ -616,7 +631,6 @@ function packageDocx(xmlContent, outDocxPath) {
   if (fs.existsSync(outDocxPath)) fs.unlinkSync(outDocxPath);
   console.log(`Repacking with forward slashes to ${outDocxPath}...`);
   
-  // Write a clean temporary .ps1 script
   const psScriptPath = path.join(tempExtractDir, 'pack.ps1');
   const psScriptContent = `
 Add-Type -AssemblyName System.IO.Compression
@@ -639,7 +653,7 @@ $zip.Dispose()
   console.log(`Successfully generated ${outDocxPath}! Size: ${fs.statSync(outDocxPath).size} bytes`);
 }
 
-packageDocx(finalReportXml, outReport);
-packageDocx(finalVivaXml, outViva);
+packageDocx(finalReportXml, outReport, true);
+packageDocx(finalVivaXml, outViva, false);
 
-console.log('ALL DOCX FILES GENERATED WITH 100% TEMPLATE COMPLIANCE!');
+console.log('ALL DOCX FILES GENERATED WITH SCREENSHOTS EMBEDDED!');

@@ -6,7 +6,16 @@
   "scripts": {
     "start": "node server.js"
   },
-  "keywords": ["gemma2", "open-source-ai", "local-llm", "allergy-safety", "ollama"],
+  "keywords": [
+    "gemma2",
+    "open-source-ai",
+    "local-llm",
+    "allergy-safety",
+    "ollama"
+  ],
   "author": "Aditya Bafna",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer-core": "^25.12.0"
+  }
 }
